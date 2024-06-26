@@ -34,6 +34,10 @@ export class User {
     return this.props.createdAt;
   }
 
+  get updatedAt() {
+    return this.props.updatedAt;
+  }
+
   set name(name: string) {
     this.props.name = name;
   }
