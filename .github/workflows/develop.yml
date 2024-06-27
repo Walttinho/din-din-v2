@@ -36,5 +36,6 @@ jobs:
         if: ${{ failure() == false }}
         uses: pascalgn/automerge-action@v0.13.0
         with:
+
           MERGE_METHOD: squash
           MERGE_COMMIT_MESSAGE: "Merge pull request #$GITHUB_EVENT_PULL_REQUEST_NUMBER"
