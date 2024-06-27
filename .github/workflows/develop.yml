@@ -3,6 +3,9 @@ name: Pull Request na Develop
 on:
   pull_request:
     branches: [ develop ]
+    
+env:
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
   build-and-test:
@@ -33,33 +36,5 @@ jobs:
         if: ${{ failure() == false }}
         uses: pascalgn/automerge-action@v0.13.0
         with:
-          MERGE_METHOD: merge
-          COMMIT_MESSAGE: "Merge pull request #$GITHUB_EVENT_PULL_REQUEST_NUMBER"
-
-  test-merge-to-master:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run unit tests
-        run: npm run test || exit 1
-
-      - name: Create PR to master on success
-        if: ${{ failure() == false }}
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }} # Usando o token padrão do GitHub Actions
-          commit-message: "Merge pull request #$GITHUB_EVENT_PULL_REQUEST_NUMBER para master"
-          title: "Merge pull request #$GITHUB_EVENT_PULL_REQUEST_NUMBER para master"
-          body: "Merge pull request #$GITHUB_EVENT_PULL_REQUEST_NUMBER para master.\n\nAll unit tests passed."
+          MERGE_METHOD: squash
+          MERGE_COMMIT_MESSAGE: "Merge pull request #$GITHUB_EVENT_PULL_REQUEST_NUMBER"
