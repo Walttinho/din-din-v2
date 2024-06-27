@@ -1,0 +1,40 @@
+name: Pull Request na Develop
+
+on:
+  pull_request:
+    branches: [ develop ]
+    
+env:
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2 
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16' 
+
+      - name: Install dependencies
+        run: npm ci 
+
+      - name: Lint code
+        run: npm run lint || exit 1 
+
+      - name: Format code
+        run: npm run format || exit 1 
+
+      - name: Run unit tests
+        run: npm run test || exit 1 
+
+      - name: Merge into develop on success
+        if: ${{ failure() == false }}
+        uses: pascalgn/automerge-action@v0.13.0
+        with:
+          MERGE_METHOD: squash
+          MERGE_COMMIT_MESSAGE: "Merge pull request #$GITHUB_EVENT_PULL_REQUEST_NUMBER"

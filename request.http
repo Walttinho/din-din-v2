@@ -1,0 +1,17 @@
+### Variaables
+@url = http://localhost:3000
+
+### POST - User/Create
+POST {{url}}/user HTTP/1.1
+Content-Type: application/json
+Authorization: 
+
+{
+    "name": "Walter Netto",
+    "email": "walter.netto@request.com",
+    "password": "12345678"
+}
+
+
+### GET - User/Get user by email
+GET {{url}}/user?email=walternetto@request.com HTTP/1.1
