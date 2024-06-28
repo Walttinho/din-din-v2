@@ -4,7 +4,7 @@ import { PrismaUserRepository } from '../../../../infrastructure/database/prisma
 import { User } from '../../../../domain/entities/User';
 
 describe('GetUserByEmailUseCase', () => {
-  let getUserByEmailUseCase: GetUserByEmailUseCase;
+  let useCase: GetUserByEmailUseCase;
   let userRepository: PrismaUserRepository;
 
   beforeEach(async () => {
@@ -30,18 +30,12 @@ describe('GetUserByEmailUseCase', () => {
       ],
     }).compile();
 
-    getUserByEmailUseCase = module.get<GetUserByEmailUseCase>(
-      GetUserByEmailUseCase,
-    );
+    useCase = module.get<GetUserByEmailUseCase>(GetUserByEmailUseCase);
     userRepository = module.get<PrismaUserRepository>(PrismaUserRepository);
   });
 
-  afterEach(() => {
-    //TODO: implemente remover os dados criados nos teste
-  });
-
   it('should be defined', () => {
-    expect(getUserByEmailUseCase).toBeDefined();
+    expect(useCase).toBeDefined();
     expect(userRepository).toBeDefined();
   });
 
