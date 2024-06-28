@@ -1,6 +1,8 @@
 ### Variaables
 @url = http://localhost:3000
+
 @accountId = d85d6010-af1d-4d78-8735-d12ced83b31b
+
 
 ### POST - User/Create
 POST {{url}}/user HTTP/1.1
@@ -15,6 +17,7 @@ Authorization:
 
 
 ### GET - User/Get user by email
+
 GET {{url}}/user?email=walter.netto@request.com HTTP/1.1
 
 ### POST - Account/create account

@@ -4,7 +4,9 @@ import { PrismaUserRepository } from '../../../../infrastructure/database/prisma
 import { User } from '../../../../domain/entities/User';
 
 describe('GetUserByEmailUseCase', () => {
+
   let useCase: GetUserByEmailUseCase;
+
   let userRepository: PrismaUserRepository;
 
   beforeEach(async () => {
@@ -36,6 +38,7 @@ describe('GetUserByEmailUseCase', () => {
 
   it('should be defined', () => {
     expect(useCase).toBeDefined();
+
     expect(userRepository).toBeDefined();
   });
 
