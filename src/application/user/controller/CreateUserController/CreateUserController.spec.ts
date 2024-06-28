@@ -8,7 +8,6 @@ describe('CreateUserController', () => {
   let useCase: CreateUserUseCase;
   let controller: CreateUserController;
   let userRepository: PrismaUserRepository;
-  let userId: string;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -33,12 +32,6 @@ describe('CreateUserController', () => {
     controller = module.get<CreateUserController>(CreateUserController);
   });
 
-  afterAll(async () => {
-    if (userId) {
-      await userRepository.delete(userId);
-    }
-  });
-
   it('should be defined', async () => {
     expect(controller).toBeDefined();
     expect(useCase).toBeDefined();
@@ -61,7 +54,6 @@ describe('CreateUserController', () => {
       });
 
       const result = await controller.execute(createUserDto);
-      userId = result.id;
 
       expect(result).toBeDefined();
       expect(result.id).toBeDefined();

@@ -9,10 +9,10 @@ generator client {
 }
 
 model User {
-  id       String   @id @default(cuid())
-  name     String
-  email    String   @unique
-  password String
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
   createdAt DateTime
   updatedAt DateTime @updatedAt
 }
@@ -20,4 +20,17 @@ model User {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Account {
+  id        String      @id @default(uuid())
+  name      String
+  type      AccountType
+  balance   Float       @default(0)
+  createdAt DateTime
+}
+
+enum AccountType {
+  CURRENT
+  SAVINGS
 }
