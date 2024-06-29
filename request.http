@@ -1,5 +1,9 @@
 ### Variaables
 @url = http://localhost:3000
+@accountId = 7843e392-fdfd-4189-85b2-b20a19182ae7
+
+@startDate = 2024-06-28T23:33:34.000Z
+@endDate = 2024-06-29T04:53:34.273Z
 
 ### POST - User/Create
 POST {{url}}/user HTTP/1.1
@@ -14,4 +18,33 @@ Authorization:
 
 
 ### GET - User/Get user by email
-GET {{url}}/user?email=walternetto@request.com HTTP/1.1
+GET {{url}}/user?email=walter.netto@request.com HTTP/1.1
+
+### POST - Account/create account
+POST {{url}}/account HTTP/1.1
+Content-Type: application/json
+Authorization: 
+
+{
+    "name": "Conta 3",
+    "type": "CURRENT",
+    "balance": 1000
+}
+
+### GET - Account/Get account by ID
+GET {{url}}/account?id={{accountId}} HTTP/1.1
+
+### Post Payment/Post Payment
+
+POST {{url}}/payment HTTP/1.1
+Content-Type: application/json
+Authorization: 
+
+{
+    "accountId": "7843e392-fdfd-4189-85b2-b20a19182ae7" ,
+    "amount": 100,
+    "description": "some description"
+}
+
+### GET Account
+GET {{url}}/account?id={{accountId}}&startDate={{startDate}}&endDate={{endDate}} HTTP/1.1
