@@ -1,14 +1,15 @@
 ### Variaables
 @url = http://localhost:3000
-@accountId = 7843e392-fdfd-4189-85b2-b20a19182ae7
+@accountId = 12018f9b-4859-4e21-a0f1-45f990fa99c7
 
 @startDate = 2024-06-28T23:33:34.000Z
 @endDate = 2024-06-29T04:53:34.273Z
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMjI4Mzk3NC00MWY4LTQ4ZjEtOWVhYy1mYjFlMTQwNTQ2NmYiLCJlbWFpbCI6IndhbHRlci5uZXR0b0ByZXF1ZXN0LmNvbSIsImlhdCI6MTcxOTc3MzIzMywiZXhwIjoxNzE5Nzc2ODMzfQ.96wpRSMr_dOBgbArxoXIfZrQAvuXDlmLWsd9KHX7e5I
 
 ### POST - User/Create
 POST {{url}}/user HTTP/1.1
 Content-Type: application/json
-Authorization: 
+Authorization: Bearer {{token}}
 
 {
     "name": "Walter Netto",
@@ -16,14 +17,24 @@ Authorization:
     "password": "12345678"
 }
 
+### POST - Auth/Login
+POST {{url}}/auth/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "walter.netto@request.com",
+    "password": "12345678"
+}
+
 
 ### GET - User/Get user by email
 GET {{url}}/user?email=walter.netto@request.com HTTP/1.1
+Authorization: Bearer {{token}}
 
-### POST - Account/create account
+### POST - Account/Create account
 POST {{url}}/account HTTP/1.1
 Content-Type: application/json
-Authorization: 
+Authorization: Bearer {{token}}
 
 {
     "name": "Conta 3",
@@ -33,18 +44,19 @@ Authorization:
 
 ### GET - Account/Get account by ID
 GET {{url}}/account?id={{accountId}} HTTP/1.1
+Authorization: Bearer {{token}}
 
-### Post Payment/Post Payment
-
+### POST - Payment/Create Payment
 POST {{url}}/payment HTTP/1.1
 Content-Type: application/json
-Authorization: 
+Authorization: Bearer {{token}}
 
 {
-    "accountId": "7843e392-fdfd-4189-85b2-b20a19182ae7" ,
-    "amount": 100,
+    "accountId": "12018f9b-4859-4e21-a0f1-45f990fa99c7",
+    "amount": 214,
     "description": "some description"
 }
 
-### GET Account
-GET {{url}}/account?id={{accountId}}&startDate={{startDate}}&endDate={{endDate}} HTTP/1.1
+### GET - Account/Filter transactions
+GET {{url}}/account/transactions?id={{accountId}}&startDate={{startDate}}&endDate={{endDate}} HTTP/1.1
+Authorization: Bearer {{token}}
