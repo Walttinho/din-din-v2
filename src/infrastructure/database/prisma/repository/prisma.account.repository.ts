@@ -20,6 +20,8 @@ export class PrismaAccountRepository extends AccountRepository {
     return result;
   }
 
+  // prisma.account.repository.ts
+
   async findById(id: string, startDate: Date, endDate: Date): Promise<Account> {
     const accountRaw = await this.prisma.account.findUnique({
       where: { id },
@@ -35,7 +37,12 @@ export class PrismaAccountRepository extends AccountRepository {
       },
     });
 
-    const payments = accountRaw.payments.map(PrismaPaymentMapper.toDomain);
+    if (!accountRaw) return null; // Early return if accountRaw is null
+
+    // Ensure payments is an array, even if it's empty
+    const payments = accountRaw.payments
+      ? accountRaw.payments.map(PrismaPaymentMapper.toDomain)
+      : [];
     const account = PrismaAccountMapper.toDomain(accountRaw);
     account.payments = payments;
     return account;
