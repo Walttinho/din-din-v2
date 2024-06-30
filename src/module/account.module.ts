@@ -1,5 +1,4 @@
-import { forwardRef, Module } from '@nestjs/common';
-import { DatabaseModule } from './database.module';
+import { Module } from '@nestjs/common';
 import { CreateAccountController } from '../application/account/controller/CreateAccountController/CreateAccountController';
 import { GetAccountByIdController } from '../application/account/controller/GetAccountByIdController/GetAccountByIdController';
 import { CreateAccountUseCase } from '../application/account/usecase/CreateAccountUseCase/CreateAccountUseCase';
@@ -8,7 +7,7 @@ import { PrismaAccountRepository } from '../infrastructure/database/prisma/repos
 import { PrismaService } from '../infrastructure/database/prisma/prisma.service';
 
 @Module({
-  imports: [forwardRef(() => DatabaseModule)],
+  imports: [],
   controllers: [CreateAccountController, GetAccountByIdController],
   providers: [
     CreateAccountUseCase,
