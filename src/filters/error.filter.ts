@@ -36,7 +36,7 @@ export class ErrorFilter implements ExceptionFilter {
       error: exception.name,
       statusCode: status,
       timestamp: new Date(),
-      path: `${request.method} ${request.url}`,
+      path: `${request.method} ${request.originalUrl}`,
     });
   }
 }
