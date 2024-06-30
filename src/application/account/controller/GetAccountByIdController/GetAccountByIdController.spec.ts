@@ -148,7 +148,8 @@ describe('GetAccountByIdController', () => {
     it('should return an account by id with filtered payments', async () => {
       const id = '1';
       const startDate = new Date('2023-01-01');
-      const endDate = new Date('2023-01-31');const account = new Account({
+      const endDate = new Date('2023-01-31');
+      const account = new Account({
         id,
         name: 'Account 1',
         type: 'CURRENT',
