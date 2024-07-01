@@ -1,13 +1,17 @@
 version: '3'
 services:
   app:
+    image: walttinho/dindin:v3
     build: .
     ports:
       - "3000:3000"
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
     env_file:
       - ./.env
     depends_on:
       - db
+    entrypoint: ["./wait-for-it.sh", "db:5432", "--", "sh", "-c", "npx prisma migrate deploy && npx prisma generate && npm start"]
   db:
     image: postgres:latest
     environment:
