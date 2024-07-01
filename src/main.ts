@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { ErrorFilter } from './filters/error.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as express from 'express';
+import * as path from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -29,8 +31,11 @@ async function bootstrap() {
     .addTag('Payment')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('doc', app, document);
+  SwaggerModule.setup('docs', app, document);
 
-  await app.listen(3000);
+  const documentationPath = path.resolve(__dirname, '..', 'documentation');
+  app.use('/documentation', express.static(documentationPath));
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
 }
 bootstrap();
