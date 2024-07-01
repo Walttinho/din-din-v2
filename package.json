@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+ "compodoc": "compodoc -p tsconfig.json -d documentation --serve --port 3000 --name 'DIN-DIN.v2'",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -40,6 +41,7 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.25",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",

@@ -1,0 +1,369 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>DIN-DIN.v2</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">DIN-DIN.v2</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+</p>
+
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+
+<h1>DIN-DIN.v2 - A RESTful API for Managing Bank Accounts and Payments</h1>
+<p><a href="README-pt.md">Read this page in Portuguese</a> | <a href="README.md">Read this page in English</a>
+<br>
+<a href="https://dindin-v2.onrender.com/docs">API Documentation</a> | <a href="https://dindin-v2.onrender.com/documentation">Code Documentation</a></p>
+<p>This RESTful API, developed with NestJS, aims to provide an efficient system for managing bank accounts and payments. It utilizes Prisma ORM for seamless database interactions, Docker for hassle-free development and deployment, and GitHub Actions for continuous integration and delivery. The project follows best practices such as Domain-Driven Design (DDD) and Test-Driven Development (TDD) to ensure a robust and scalable application.</p>
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#running-with-docker">Running with Docker</a></li>
+<li><a href="#database-migrations-and-seeding">Database Migrations and Seeding</a></li>
+<li><a href="#api-endpoints">API Endpoints</a></li>
+<li><a href="#contribution">Contribution</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2>Installation</h2>
+<p>To run the project locally, follow these steps:</p>
+<ol>
+<li>Clone the repository from the master branch. <code>git clone https://github.com/Walttinho/din-din-v2.git</code></li>
+<li>Navigate to the project directory. <code>cd din-din-v2</code></li>
+<li>Install dependencies using npm or yarn: <code>npm install</code> or <code>yarn install</code>.</li>
+<li>Set up your environment variables as needed. <code>touch .env &amp;&amp; echo -e &quot;DATABASE_URL=\nJWT_SECRET=&quot; &gt;&gt; .env</code></li>
+<li>Run the application: <code>npm run start:dev</code> or <code>yarn start:dev</code>.</li>
+</ol>
+<h2>Running with Docker</h2>
+<p>To run the project using Docker, follow these steps:</p>
+<ol>
+<li>Install Docker on your machine if you haven&#39;t already.</li>
+<li>Build the Docker image: <code>docker build -t din-din-v2 .</code></li>
+<li>Run the Docker container: <code>docker run -p 3000:3000 din-din-v2</code></li>
+</ol>
+<h2>Database Migrations and Seeding</h2>
+<p>To apply database migrations and seeding, follow these steps:</p>
+<ol>
+<li>Run database migrations: <code>npx prisma migrate dev</code></li>
+<li>Seed the database with initial data: <code>npx prisma db seed</code></li>
+</ol>
+<h2>API Endpoints</h2>
+<p>For detailed information on each endpoint, click on the endpoint name. Additionally, you can visit the interactive documentation at <a href="https://dindin-v2.onrender.com/docs">Swagger</a> to explore and test the API endpoints directly in your browser.</p>
+<ul>
+<li><a href="#1-create-a-new-user">POST /user</a>: Create a new user with name, email, and password.</li>
+<li><a href="#2-find-a-user-by-email">GET /user</a>: Find a user by email.</li>
+<li><a href="#3-authenticate-a-user">POST /login</a>: Authenticate a user and return an access token.</li>
+<li><a href="#4-create-a-new-bank-account">POST /account</a>: Create a new bank account for a user.</li>
+<li><a href="#5-find-a-bank-account-by-id">GET /account</a>: Find a bank account by ID.</li>
+<li><a href="#6-create-a-new-payment">POST /payment</a>: Create a new payment transaction from a bank account to another.</li>
+<li><a href="#7-filter-transactions">GET /account/payment</a>: Find transactions by date.</li>
+</ul>
+<h2>Contribution</h2>
+<p>We appreciate all contributors who have helped make this project what it is today. If you are interested in contributing, please follow the instructions below:</p>
+<ol>
+<li>Fork the project.</li>
+<li>Create a branch with the name of your feature or fix (<code>git checkout -b feature/my-new-feature</code>).</li>
+<li>Make your changes and commit them (<code>git commit -am &#39;Add some feature&#39;</code>).</li>
+<li>Push to your branch (<code>git push origin feature/my-new-feature</code>).</li>
+<li>Open a Pull Request.</li>
+</ol>
+<p>Please ensure your code is in line with the project&#39;s style guidelines and that all test checks are passing.</p>
+<h2>License</h2>
+<p>Nest is <a href="LICENSE">MIT licensed</a>.</p>
+<h2>API Endpoints</h2>
+<h3>1. <a href="#api-endpoints">Create a new user</a></h3>
+<p><strong>Route:</strong> <code>POST /user</code></p>
+<p><strong>Description:</strong> Create a new user</p>
+<p><strong>Request Body:</strong></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;name&quot;: &quot;John Doe&quot;,
+  &quot;email&quot;: &quot;john.doe&#64;example.com&quot;,
+  &quot;password&quot;: &quot;SecurePassword123!&quot;
+}</code></pre></div><p><strong>Response:</strong></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;id&quot;: &quot;df618536-a348-47c3-8438-fb40e7a1c51b&quot;,
+  &quot;name&quot;: &quot;John Doe&quot;,
+  &quot;email&quot;: &quot;john.doe&#64;example.com&quot;,
+  &quot;createdAt&quot;: &quot;2024-06-30T22:00:32.828Z&quot;,
+  &quot;updatedAt&quot;: &quot;2024-06-30T22:00:32.828Z&quot;
+}</code></pre></div><h3>2. <a href="#api-endpoints">Find a user by email.</a></h3>
+<p><strong>Route:</strong> <code>GET /user?john.doe@example.com</code></p>
+<p><strong>Description:</strong> Find a user by email</p>
+<p><strong>Response:</strong></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;id&quot;: &quot;df618536-a348-47c3-8438-fb40e7a1c51b&quot;,
+  &quot;name&quot;: &quot;John Doe&quot;,
+  &quot;email&quot;: &quot;john.doe&#64;example.com&quot;,
+  &quot;createdAt&quot;: &quot;2024-06-30T22:00:32.828Z&quot;,
+  &quot;updatedAt&quot;: &quot;2024-06-30T22:00:32.976Z&quot;
+}</code></pre></div><h3>3. <a href="#api-endpoints">Authenticate a user.</a></h3>
+<p><strong>Route:</strong> <code>POST /auth</code></p>
+<p><strong>Description:</strong> Authenticate a user</p>
+<p><strong>Request Body:</strong></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;email&quot;: &quot;john.doe&#64;example.com&quot;,
+  &quot;password&quot;: &quot;SecurePassword123!&quot;
+}</code></pre></div><p><strong>Response:</strong></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;user&quot;: {
+    &quot;id&quot;: &quot;df618536-a348-47c3-8438-fb40e7a1c51b&quot;,
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;email&quot;: &quot;john.doe&#64;example.com&quot;,
+    &quot;createdAt&quot;: &quot;2024-06-30T22:00:32.828Z&quot;,
+    &quot;updatedAt&quot;: &quot;2024-06-30T22:00:32.976Z&quot;
+  },
+  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZjYxODUzNi1hMzQ4LTQ3YzMtODQzOC1mYjQwZTdhMWM1MWIiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwiaWF0IjoxNzE5Nzg4MTU2LCJleHAiOjE3MTk3OTE3NTZ9.lLtLNTb7x3IiK6fIgLWJtE1zccYklbUrApv8U0mxnGw&quot;
+}</code></pre></div><h3>4. <a href="#api-endpoints">Create a new bank account.</a></h3>
+<p><strong>Route:</strong> <code>POST /account</code></p>
+<p><strong>Description:</strong> Create a new bank account</p>
+<p><strong>Request Body:</strong></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;name&quot;: &quot;Account 01&quot;,
+  &quot;type&quot;: &quot;CURRENT&quot;,
+  &quot;balance&quot;: 1000
+}</code></pre></div><p><strong>Response:</strong></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;id&quot;: &quot;11cd6603-01d8-4d90-a800-3cc0a7df0851&quot;,
+  &quot;name&quot;: &quot;Account 01&quot;,
+  &quot;type&quot;: &quot;CURRENT&quot;,
+  &quot;balance&quot;: 1000,
+  &quot;createdAt&quot;: &quot;2024-06-30T22:59:46.606Z&quot;
+}</code></pre></div><h3>5. <a href="#api-endpoints">Find a bank account by ID.</a></h3>
+<p><strong>Route:</strong> <code>GET /account?id=11cd6603-01d8-4d90-a800-3cc0a7df0851</code></p>
+<p><strong>Description:</strong> Find a bank account by ID</p>
+<p><strong>Response:</strong></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;id&quot;: &quot;11cd6603-01d8-4d90-a800-3cc0a7df0851&quot;,
+  &quot;name&quot;: &quot;Account 01&quot;,
+  &quot;type&quot;: &quot;CURRENT&quot;,
+  &quot;balance&quot;: 1000,
+  &quot;createdAt&quot;: &quot;2024-06-30T22:59:46.606Z&quot;,
+  &quot;payments&quot;: []
+}</code></pre></div><h3>6. <a href="#api-endpoints">Create a new payment.</a></h3>
+<p><strong>Route:</strong> <code>POST /payment</code></p>
+<p><strong>Description:</strong> Create a new payment</p>
+<p><strong>Request Body:</strong></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;accountId&quot;: &quot;12018f9b-4859-4e21-a0f1-45f990fa99c7&quot;,
+  &quot;amount&quot;: 214,
+  &quot;description&quot;: &quot;some description&quot;
+}</code></pre></div><p><strong>Response:</strong></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;id&quot;: &quot;48800cf4-1ce6-4324-8318-1f436dd23c41&quot;,
+  &quot;accountId&quot;: &quot;11cd6603-01d8-4d90-a800-3cc0a7df0851&quot;,
+  &quot;amount&quot;: 214,
+  &quot;description&quot;: &quot;some description&quot;,
+  &quot;createdAt&quot;: &quot;2024-06-30T23:02:28.428Z&quot;
+}</code></pre></div><h3>7. <a href="#api-endpoints">Filter transactions</a></h3>
+<p><strong>Route:</strong> <code>GET /account?id=11cd6603-01d8-4d90-a800-3cc0a7df0851&amp;startDate=2024-06-30T00:00:00.000Z&amp;endDate=2024-06-30T23:59:59.999Z</code></p>
+<p><strong>Description:</strong> Filter transactions for a bank account</p>
+<p><strong>Response:</strong></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">[
+  {
+    &quot;id&quot;: &quot;11cd6603-01d8-4d90-a800-3cc0a7df0851&quot;,
+    &quot;name&quot;: &quot;Account 01&quot;,
+    &quot;type&quot;: &quot;CURRENT&quot;,
+    &quot;balance&quot;: 474,
+    &quot;createdAt&quot;: &quot;2024-06-30T22:59:46.606Z&quot;,
+    &quot;payments&quot;: [
+      {
+        &quot;id&quot;: &quot;48800cf4-1ce6-4324-8318-1f436dd23c41&quot;,
+        &quot;accountId&quot;: &quot;11cd6603-01d8-4d90-a800-3cc0a7df0851&quot;,
+        &quot;amount&quot;: 214,
+        &quot;description&quot;: &quot;some description&quot;,
+        &quot;createdAt&quot;: &quot;2024-06-30T23:02:28.428Z&quot;
+      },
+      {
+        &quot;id&quot;: &quot;ac86414f-f3a9-44ab-8e1e-518430f391af&quot;,
+        &quot;accountId&quot;: &quot;11cd6603-01d8-4d90-a800-3cc0a7df0851&quot;,
+        &quot;amount&quot;: 312,
+        &quot;description&quot;: &quot;some description&quot;,
+        &quot;createdAt&quot;: &quot;2024-06-30T23:09:47.149Z&quot;
+      }
+    ]
+  }
+]</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
